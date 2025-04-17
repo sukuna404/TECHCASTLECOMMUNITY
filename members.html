@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Members - Creative Developers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Base Styles */
+        :root {
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --primary: #00FFA3;
+            --secondary: #FF00E5;
+            --text: #FFFFFF;
+            --text-secondary: #AAAAAA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Neon Effects */
+        .neon-text {
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary);
+            color: var(--primary);
+        }
+
+        .neon-border {
+            box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        /* Grid Design Element */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 255, 163, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 163, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Header Section */
+        .header {
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        /* Header Animation */
+        .header-content {
+            animation: floatContent 4s ease-in-out infinite;
+        }
+
+        @keyframes floatContent {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .header-content {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            text-align: center;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background-color: rgba(0, 255, 163, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 30px var(--primary);
+        }
+
+        .header h1 {
+            font-size: 60px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .header h1 span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background-color: var(--primary);
+            bottom: 5px;
+            left: 0;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .header p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* Members Section */
+        .members {
+            padding: 50px 0 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            position: relative;
+            text-align: center;
+        }
+        
+        /* Team Section Styles */
+        .team .section-header {
+            text-align: center;
+        }
+        
+        .team .section-tag {
+            display: inline-block;
+            margin: 0 auto;
+        }
+        
+        .team h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .team p {
+            text-align: center;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background-color: rgba(0, 255, 163, 0.1);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px solid var(--primary);
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .member-card {
+            background-color: var(--surface);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px #00ffa34d;
+            border-color: var(--primary);
+        }
+
+        .member-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .member-content {
+            padding: 25px;
+        }
+
+        .member-content h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+
+        .member-content h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .member-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .member-skills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .skill {
+            padding: 5px 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--surface);
+            padding: 50px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 5px var(--primary);
+            background-color: rgba(0, 255, 163, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background-color: rgba(0, 255, 163, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+            opacity: 0.3;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 30%;
+            animation-delay: 2s;
+            opacity: 0.2;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            top: 30%;
+            right: 60%;
+            animation-delay: 4s;
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--surface);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                padding: 50px 0;
+                transition: 0.3s ease-in-out;
+                z-index: 999;
+                border-left: 1px solid var(--primary);
+                box-shadow: -5px 0 15px rgba(0, 255, 163, 0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 28px;
+            }
+            .header p {
+                font-size: 16px;
+            }
+            .member-card img {
+                height: 240px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid Background -->
+    <div class="grid-background"></div>
+
+    <!-- Floating Elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo"><img src="tech5.png" alt="Tech Castle Club Logo" height="150"></div>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="achievement.html">Achievements</a>
+                <a href="members.html">Members</a>
+                <a href="memories.html">Memories</a>
+                <a href="index.html" class="register-btn" style="background-color: var(--primary); color: var(--background); padding: 8px 16px; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; margin-top: -5px;">REGISTER</a>
+            </div>
+        </nav>
+
+        <!-- Header Section -->
+        <section class="header" style="display: flex; justify-content: center; align-items: center; text-align: center;">
+            <div class="header-content">
+                <div class="header-tag">OUR TEAM</div>
+                <h1>Meet our <span>talented team</span> of creative developers</h1>
+                <p>We are a diverse group of passionate individuals dedicated to creating innovative digital solutions that make a difference.</p>
+            </div>
+        </section>
+
+        <!-- Members Section -->
+        <section id="Members" class="Team members">
+            <div class="section-header">
+                <div class="section-tag">Team Members</div>
+                <h2>The Creative Minds Behind Our Work</h2>
+                <p>Our team combines technical expertise with creative thinking to deliver exceptional digital experiences.</p>
+            </div>
+
+            <div class="members-grid">
+                <!-- SONARSETH -->
+                <div class="member-card">
+                    <img src="SONAR.jpg" alt="Team Member 2">
+                    <div class="member-content">
+                        <h3>SHIVA SONAR</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/sukuna404" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/shiv-sonar-shiva-595451351/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/shiva_x_light/" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- nash -->
+                <div class="member-card">
+                    <img src="nash babu.jpg" alt="Team Member 2">
+                    <div class="member-content">
+                        <h3>NASH</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/darko-mode" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/nash-d-souza-a0ba4a333/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/nash.x0x/" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAWAR-->
+                <div class="member-card">
+                    <img src="rutvik.jpg" alt="Team Member 3">
+                    <div class="member-content">
+                        <h3>RUTVIK PAWAR</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill="></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/Rutvik-54" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/rutvik-pawar-7582a8351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color: #0077B5;"><i class="fab fa-linkedin"></i>
+                                <a href="https://www.instagram.com/pawar54479/?utm_source=ig_web_button_share_sheet" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OMP -->
+                <div class="member-card">
+                    <img src="OMP.jpg" alt="Team Member 4">
+                    <div class="member-content">
+                        <h3>OM PATEL</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/SNEHALPANALE" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/snehal-panale-570018356/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/__om._.patel__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- SNEHAL -->
+                <div class="member-card">
+                    <img src="panale.jpg" alt="Team Member 4">
+                    <div class="member-content">
+                        <h3>SNEHAL PANALE </h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/SNEHALPANALE" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/snehal-panale-570018356/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/snehalp_009?igsh=MTRxazY2Y3F1eGd5cw==" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JHANVI -->
+                <div class="member-card">
+                    <img src="j.jpg" alt="Team Member 5">
+                    <div class="member-content">
+                        <h3>JANHAVI NIKUMBH</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/Janhavvi79
+                            " style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/janhavi-nikumbh-0685282b4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+                            " style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/janhavi.nikumbh_/profilecard/?igsh=MW1kbnlsMmF6NndyYw==" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROHAN -->
+                <div class="member-card">
+                    <img src="barbole.jpg" alt="Team Member 6">
+                    <div class="member-content">
+                        <h3>ROHAN BARBOLE</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/rohan-barbole-585871326/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRIYANSHU-->
+                <div class="member-card">
+                    <img src="PRIYANSHU.jpg" alt="Team Member 7">
+                    <div class="member-content">
+                        <h3>PRIYANSHU GUPTA</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/Pg45678" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/priyanshu-gupta-582253315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/priyanshu_gupta_?igsh=MXdiZ3VsaWRzdXp5YQ==" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OMKAR -->
+                <div class="member-card">
+                    <img src="omkar.jpg" alt="Team Member 8">
+                    <div class="member-content">
+                        <h3>OMKAR MAHANTA</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/Omkarmahanta" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/omkar-mahanta-1bb79229b/" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/omkar_mahanta/" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SANSKAR  -->
+                <div class="member-card">
+                    <img src="sanskar.jpg" alt="Team Member 9">
+                    <div class="member-content">
+                        <h3>SANSKAR VARPE</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/sanskar-18" style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/sanskar-varpe-943a63320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/sanskar._.18?utm_source=qr&igsh=eXV0dnVuOWtoZHln" style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SHREEYANSH-->
+                <div class="member-card">
+                    <img src="shreee.jpg" alt="Team Member 10">
+                    <div class="member-content">
+                        <h3>SHREEYANSH GUPTA</h3>
+                        <h4>Core-Member</h4>
+                        <div class="member-skills">
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                            <div class="skill"></div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="https://github.com/Sxhreeyansh?tab=repositories
+                            " style="color: #333;"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/shreeyansh-gupta-902246333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+                            " style="color: #0077B5;"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.instagram.com/honey_yayy?igsh=bDZmM2JvdWh1b3U2
+
+                            " style="color: #E1306C;"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-logo">TECH CASTLE</div>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/techcastlee?igsh=MXY3ZXR0bXNjYW1mMA=="" aria-label="Instagram" style="color: #E1306C;"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="https://www.linkedin.com/company/tech-castle-club/" aria-label="LinkedIn" style="color: #0077B5;"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    <a href="https://github.com/TechCastleClub2309" aria-label="GitHub"><i class="fab fa-github fa-lg"></i></a>
+                    <a href=https://chat.whatsapp.com/BWieRJnZK0Q7TgQjoSDgn0" aria-label="WhatsApp" style="color: #25D366;"><i class="fab fa-whatsapp fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy;2025 TECH CASTLE CLUB. All rights reserved.
+                UI/UX BY NASH & SHIVA
+               
+                CODE BY RUTVIK & SHIVA
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+<style>
+    /* Tablet Styles */
+    @media screen and (max-width: 1024px) {
+        .members-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+        }
+
+        .container {
+            padding: 0 30px;
+        }
+    }
+
+    /* Mobile Styles */
+    @media screen and (max-width: 768px) {
+        .members-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+        }
+
+        .header p {
+            font-size: 16px;
+            padding: 0 20px;
+        }
+
+        .member-card {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .member-content {
+            padding: 20px;
+        }
+
+        .member-content h3 {
+            font-size: 20px;
+        }
+
+        .footer-container {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .social-links {
+            justify-content: center;
+        }
+    }
+
+    /* Small Mobile Styles */
+    @media screen and (max-width: 480px) {
+        .header-tag {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+        }
+
+        .member-card img {
+            height: 200px;
+        }
+
+        .nav-links a {
+            font-size: 18px;
+        }
+    }
+
+    /* Fix for navigation menu */
+    .menu-icon {
+        display: none;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+        .menu-icon {
+            display: block;
+            z-index: 1001;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        .nav-links {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            height: 100vh;
+            background-color: var(--surface);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .nav-links.active {
+            right: 0;
+        }
+
+        .logo img {
+            height: 100px;
+        }
+    }
+</style>
+
+<!-- Add this script before closing body tag -->
+<script>
+    const menuIcon = document.querySelector('.menu-icon');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuIcon.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !menuIcon.contains(e.target)) {
+            navLinks.classList.remove('active');
+            menuIcon.classList.remove('active');
+        }
+    });
+</script>
+</body>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memorable Moments - Tech Castle Club</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Use your existing root variables */
+        :root {
+            --background: #0F0F0F;
+            --surface: #1A1A1A;
+            --primary: #00FFA3;
+            --secondary: #FF00E5;
+            --text: #FFFFFF;
+            --text-secondary: #AAAAAA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+        }
+
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 255, 163, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 163, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .header-tag {
+            display: inline-block;
+            background-color: rgba(0, 255, 163, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary);
+        }
+
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 span {
+            color: var(--primary);
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .moment-card {
+            background: var(--surface);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .moment-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 255, 163, 0.2);
+        }
+
+        .moment-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .moment-content {
+            padding: 20px;
+        }
+
+        .moment-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .moment-content p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .moment-date {
+            color: var(--primary);
+            font-size: 0.8em;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .moments-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .moments-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo"><img src="tech5.png" alt="Tech Castle Club Logo" height="150"></div>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="achievement.html">Achievements</a>
+                <a href="members.html">Members</a>
+                <a href="memories.html">Memories</a>
+                <a href="index.html" class="register-btn" style="background-color: var(--primary); color: var(--background); padding: 8px 16px; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; margin-top: -5px;">REGISTER</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Add these styles to your existing style section -->
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-icon {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--surface);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                padding: 50px 0;
+                transition: 0.3s ease-in-out;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+                display: flex;
+            }
+        }
+    </style>
+
+    <!-- Add this script before closing body tag -->
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuIcon.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuIcon.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuIcon.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuIcon.classList.remove('active');
+            }
+        });
+    </script>
+
+        <header class="header">
+            <div class="header-tag">MEMORIES</div>
+            <h1>Our <span>Memorable</span> Moments</h1>
+            <p>Capturing the journey of Tech Castle Club through unforgettable experiences</p>
+        </header>
+
+        <div class="moments-grid">
+            <!-- Add your moment cards here -->
+            <div class="moment-card">
+                <img src="hack2.jpg" alt="Hackathon Victory" class="moment-image">
+                <div class="moment-content">
+                    <h3>Hack2Stack Victory</h3>
+                    <p>Our team's triumphant moment at the Hack2Stack hackathon, showcasing innovation and teamwork.</p>
+                    <div class="moment-date">October 2023</div>
+                </div>
+            </div>
+
+            <div class="moment-card">
+                <img src="tech5.png" alt="Club Formation" class="moment-image">
+                <div class="moment-content">
+                    <h3>Club Formation</h3>
+                    <p>The beginning of our journey as Tech Castle Club, bringing together passionate tech enthusiasts.</p>
+                    <div class="moment-date">September 2023</div>
+                </div>
+            </div>
+
+            <!-- Add more moment cards as needed -->
+        </div>
+    </div>
+
+    <!-- Add your existing footer here -->
+</body>
+</html>
