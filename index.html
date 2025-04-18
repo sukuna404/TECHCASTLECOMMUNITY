@@ -203,18 +203,28 @@
         </section>
 
         <!-- Members Button -->
-        <div style="text-align: right; margin: 40px 0;">
+        <div style="text-align: center; margin: 40px 0;">
             <a href="members.html" class="cta-button" style="display: inline-block; padding: 15px 40px; background-color: rgba(0, 255, 163, 0.2); color: var(--text); border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1.2rem; transition: all 0.3s ease; text-transform: uppercase;">Our Team</a>
         </div>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <div class="section-header">
-                <div class="section-tag">Join Us</div>
-                <h2>Register for Tech Castle Club</h2>
-                <p>Become a part of our innovative tech community. Fill out the form below to register and start your journey with us.</p>
+        <section id="contact" class="contact" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: -40px;">
+            <style>
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                    100% { transform: translateY(0px); }
+                }
+            
+                .section-header {
+                    animation: float 3s ease-in-out infinite;
+                }
+            </style>
+            <div class="section-header" style="text-align: center; width: 100%; max-width: 800px; margin: -20px auto 20px;">
+                <div class="section-tag" style="text-align: center;">Join Us</div>
+                <h2 style="text-align: center; font-size: 2.5rem; margin: 10px 0;">Register for Tech Castle Club</h2>
+                <p style="text-align: center; max-width: 600px; margin: 0 auto;">Become a part of our innovative tech community. Fill out the form below to register and start your journey with us.</p>
             </div>
-
             <div class="contact-container">
                 <div class="contact-info">
                     <p>Join the Tech Castle Club and be part of our growing community of tech enthusiasts. Registration is open for students who want to enhance their skills, collaborate on projects, and participate in exciting tech events.</p>
