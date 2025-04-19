@@ -6,6 +6,8 @@
     <title>TCC WEBSITE</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="index.css">
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="index.js"></script>
 
     <style>
         /* Tablet Styles */
@@ -242,7 +244,7 @@
                 </div>
 
                 <div class="contact-form" style="background-color: rgba(15, 15, 15, 0.9); border: 1px solid rgba(0, 255, 163, 0.3); border-radius: 10px; box-shadow: 0 0 20px rgba(0, 255, 163, 0.2);">
-                    <form>
+                    <form id="registrationForm">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required placeholder="Enter your name" style="background-color: rgba(15, 15, 15, 0.9); border: 1px solid rgba(0, 255, 163, 0.3); color: var(--text); width: 100%; padding: 15px; border-radius: 4px;">
@@ -332,31 +334,53 @@
     </footer>
     
     <!-- Success Popup -->
-    <div id="successPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(15, 15, 15, 0.95); border: 1px solid var(--primary); border-radius: 10px; padding: 30px; text-align: center; z-index: 1000; box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);">
+    <div id="successPopup" class="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(15, 15, 15, 0.95); border: 1px solid var(--primary); border-radius: 10px; padding: 30px; text-align: center; z-index: 1000; box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);">
         <i class="fa-solid fa-circle-check" style="color: var(--primary); font-size: 50px; margin-bottom: 20px;"></i>
         <h3 style="color: white; font-size: 24px; margin-bottom: 15px;">Registration Successful!</h3>
         <p style="color: var(--text-secondary); margin-bottom: 20px;">Thank you for joining Tech Castle Club. We'll get back to you soon!</p>
-        <button onclick="closePopup()" style="background-color: var(--primary); color: var(--background); padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
+        <button id="closePopupBtn" style="background-color: var(--primary); color: var(--background); padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Close</button>
     </div>
     <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 999;"></div>
 
-    <script src="index.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Form submission handling
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success popup and overlay
+            document.getElementById('successPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+            
+            // You can add your form submission logic here
+            // For example, sending data to a server or Firebase
+        });
+
+        // Close popup functionality
+        document.getElementById('closePopupBtn').addEventListener('click', function() {
+            document.getElementById('successPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+
+        // Close popup when clicking on overlay
+        document.getElementById('overlay').addEventListener('click', function() {
+            document.getElementById('successPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
-
-<script>
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-            navLinks.classList.remove('active');
-        }
-    });
-</script>

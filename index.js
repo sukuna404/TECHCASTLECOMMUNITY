@@ -1,3 +1,6 @@
+import { db } from './firebase-config.js';
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 document.addEventListener('DOMContentLoaded', function() {
     // Hamburger menu functionality
     const hamburger = document.getElementById('hamburger');
@@ -7,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
     });
+
+    // Add event listener for close button in success popup
+    const closeButton = document.querySelector('#successPopup button');
+    if (closeButton) {
+        closeButton.addEventListener('click', closePopup);
+    }
+    
+    // Add event listener for overlay click to close popup
+    document.getElementById('overlay').addEventListener('click', closePopup);
 
     // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(link => {
@@ -42,7 +54,7 @@ function closePopup() {
     document.getElementById('overlay').style.display = 'none';
 }
 
-document.querySelector('form').addEventListener('submit', function(e) {
+document.querySelector('form').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // Get form fields
@@ -74,7 +86,25 @@ document.querySelector('form').addEventListener('submit', function(e) {
         return;
     }
 
-    // If all validation passes, show success popup
-    showPopup();
-    this.reset(); // Reset form fields
+    try {
+        // Save to Firestore
+        const registrationRef = collection(db, 'registration');
+        await addDoc(registrationRef, {
+            name,
+            email,
+            course,
+            year,
+            phone,
+            events,
+            message,
+            timestamp: new Date()
+        });
+
+        // If successful, show success popup
+        showPopup();
+        this.reset(); // Reset form fields
+    } catch (error) {
+        console.error('Error saving registration:', error);
+        alert('An error occurred while submitting the form. Please try again.');
+    }
 });
